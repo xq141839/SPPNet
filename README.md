@@ -26,10 +26,6 @@ To apply the model on a custom dataset, the data tree should be constructed as:
                 ├── image_2.npy
                 ├── image_n.npy
 ```
-## CSV generation 
-```
-python data_split_csv.py --dataset your/data/path --size 0.9 
-```
 ## Train
 ```
 python train.py --dataset your/data/path --jsonfile your/json/path --loss dice --batch 16 --lr 0.001 --epoch 50 
