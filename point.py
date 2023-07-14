@@ -147,8 +147,8 @@ def CNPS(npy_path, pos_num = 1, neg_num = 1, is_center = False):
 
 
 if __name__ == '__main__':
-    npy_path = '/userhome/cs2/xq141839/hku_project/Medical_SAM/monuseg/data/npy/TCGA-2Z-A9J9-01A-01-TS1.npy'
-    mask_path = '/userhome/cs2/xq141839/hku_project/Medical_SAM/monuseg/data/masks/TCGA-2Z-A9J9-01A-01-TS1.png'
+    npy_path = 'monuseg/data/npy/TCGA-2Z-A9J9-01A-01-TS1.npy'
+    mask_path = 'monuseg/data/masks/TCGA-2Z-A9J9-01A-01-TS1.png'
     point_coord, point_class = CentreExtractor(npy_path)
 
     print(point_coord)
