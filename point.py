@@ -163,7 +163,7 @@ if __name__ == '__main__':
     cv2.imwrite('point_visual.png', mask)
 
 
-    tmp, point_coord, point_class = HybridExtractor(npy_path)
+    tmp, point_coord, point_class = CNPS(npy_path)
 
     print(point_coord)
     print(point_class)
