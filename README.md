@@ -13,6 +13,13 @@
 ## Environment
 NVIDIA RTX2080Ti Tensor Core GPU, 4-core CPU, and 28GB RAM
 
+## Evaluation on MoNuSeg-2018
+
+| Method| mIoU(%) | DSC(%) | Params(M) | FLOPs | FPS |
+|  ----  |  ----  | ----  | ----  | ----  | ----  |
+| SAM  | 60.18±8.15 | 74.76±7.00 | 635.93 | 2736.63 | 1.39| 
+| SPPNet  | 66.43±4.32 | 79.77±3.11 | 9.79 | 39.90 | 22.61 | 
+
 ## Dataset
 To apply the model on a custom dataset, the data tree should be constructed as:
 ``` 
