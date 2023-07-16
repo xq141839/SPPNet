@@ -16,7 +16,7 @@ from timm.models.layers import DropPath as TimmDropPath,\
     to_2tuple, trunc_normal_
 from timm.models.registry import register_model
 from typing import Tuple
-import loralib as lora
+#import loralib as lora
 
 
 class Conv2d_BN(torch.nn.Sequential):
