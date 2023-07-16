@@ -11,7 +11,7 @@ from functools import partial
 
 class LLSIE(nn.Module):
     def __init__(self,in_channels, out_channels, kernel_size=3):
-        super(PFC, self).__init__()
+        super(LLSIE, self).__init__()
         self.input_layer = nn.Sequential(
                     nn.Conv2d(in_channels, out_channels, kernel_size, padding=  kernel_size // 2),
                     nn.ReLU(inplace=True),
