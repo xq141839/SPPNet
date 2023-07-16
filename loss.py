@@ -6,7 +6,7 @@ import numpy as np
 
 class DiceLoss(nn.Module):
     def __init__(self, weight=None, size_average=True):
-        super(DiceLoss_binary, self).__init__()
+        super(DiceLoss, self).__init__()
 
     def forward(self, inputs, targets, smooth=1):
         
@@ -19,7 +19,7 @@ class DiceLoss(nn.Module):
 
 class IoU(nn.Module):
     def __init__(self, weight=None, size_average=True):
-        super(IoU_binary, self).__init__()
+        super(DiceLoss, self).__init__()
 
     def forward(self, inputs, targets, smooth=1):
 
