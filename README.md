@@ -2,6 +2,7 @@
 
 ## News
 2023.07.14: The SPPNet model and training code have been submitted. The paper will be updated later.
+
 2023.08.24: The paper has been accepted by [MICCAI-MLMI 2023](https://sites.google.com/view/mlmi2023). The preprint has been available at [arXiv](https://arxiv.org/abs/2308.12231).
 
 ## Requirements
