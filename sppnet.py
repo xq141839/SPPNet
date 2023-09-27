@@ -33,21 +33,22 @@ class LLSIE(nn.Module):
         return x
 
 class Model(nn.Module):
-    def __init__(self):
+    def __init__(self, image_encoder):
         super(Model, self).__init__()
-        self.image_encoder = TinyViT(img_size=1024, in_chans=3, num_classes=1000,
-            embed_dims=[64, 128, 160, 320],
-            depths=[2, 2, 6, 2],
-            num_heads=[2, 4, 5, 10],
-            window_sizes=[7, 7, 14, 7],
-            mlp_ratio=4.,
-            drop_rate=0.,
-            drop_path_rate=0.0,
-            use_checkpoint=True,
-            mbconv_expand_ratio=4.0,
-            local_conv_size=3,
-            layer_lr_decay=0.8
-        )
+        self.image_encoder = image_encoder
+        # self.image_encoder = TinyViT(img_size=1024, in_chans=3, num_classes=1000,
+        #     embed_dims=[64, 128, 160, 320],
+        #     depths=[2, 2, 6, 2],
+        #     num_heads=[2, 4, 5, 10],
+        #     window_sizes=[7, 7, 14, 7],
+        #     mlp_ratio=4.,
+        #     drop_rate=0.,
+        #     drop_path_rate=0.0,
+        #     use_checkpoint=True,
+        #     mbconv_expand_ratio=4.0,
+        #     local_conv_size=3,
+        #     layer_lr_decay=0.8
+        # )
         self.prompt_encoder = PromptEncoder(
             embed_dim=256,
             image_embedding_size=(64, 64), # 1024 // 16
