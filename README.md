@@ -5,6 +5,8 @@
 
 2023.08.24: The paper has been accepted by [MICCAI-MLMI 2023](https://sites.google.com/view/mlmi2023). The preprint has been available at [arXiv](https://arxiv.org/abs/2308.12231).
 
+2023.09.27: Release a New Beta version for users who want to fine-tune the SAM pre-trained image encoder. We add the adapter based on [Medical-SAM-Adapter](https://github.com/WuJunde/Medical-SAM-Adapter).
+
 ## Requirements
 1. pytorch==1.10.0
 2. pytorch-lightning==1.1.0
