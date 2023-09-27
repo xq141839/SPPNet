@@ -10,7 +10,7 @@ import torch.nn.functional as F
 
 from typing import Optional, Tuple, Type
 
-from .common import LayerNorm2d, MLPBlock
+from .common import LayerNorm2d, MLPBlock, Adapter
 
 
 # This class and its supporting functions below lightly adapted from the ViTDet backbone available at: https://github.com/facebookresearch/detectron2/blob/main/detectron2/modeling/backbone/vit.py # noqa
@@ -149,6 +149,7 @@ class Block(nn.Module):
         """
         super().__init__()
         self.norm1 = norm_layer(dim)
+        
         self.attn = Attention(
             dim,
             num_heads=num_heads,
@@ -163,6 +164,13 @@ class Block(nn.Module):
 
         self.window_size = window_size
 
+        #-----------------------------------------------
+
+        self.ft = Adapter(dim)
+        self.MLP_Adapter = Adapter(dim, skip_connect=False)  
+
+        #-----------------------------------------------
+
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         shortcut = x
         x = self.norm1(x)
@@ -172,12 +180,24 @@ class Block(nn.Module):
             x, pad_hw = window_partition(x, self.window_size)
 
         x = self.attn(x)
+        #-----------------------------------------------
+
+        x = self.ft(x)
+
+        #-----------------------------------------------
+
         # Reverse window partition
         if self.window_size > 0:
             x = window_unpartition(x, self.window_size, pad_hw, (H, W))
 
         x = shortcut + x
-        x = x + self.mlp(self.norm2(x))
+
+        #-----------------------------------------------
+        xn = self.norm2(x)
+        x = x + self.mlp(xn) + 0.5 * self.MLP_Adapter(xn)
+
+        # x = x + self.mlp(self.norm2(x))
+        #-----------------------------------------------
 
         return x
 
