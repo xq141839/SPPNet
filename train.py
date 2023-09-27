@@ -70,24 +70,24 @@ def train_model(model, criterion, optimizer, scheduler, num_epochs=5):
         
             # Iterate over data
             #for inputs,labels,label_for_ce,image_id in dataloaders[phase]: 
-            for point_coord, point_class, img_vit, labels, _, h, w in tqdm(dataloaders[phase]):      
+            for img, point_coord, point_class, img_vit, labels, _, h, w in tqdm(dataloaders[phase]):      
                 # wrap them in Variable
                 if torch.cuda.is_available():
 
                     point_coord = Variable(point_coord.cuda())
                     point_class = Variable(point_class.cuda())
                     img_vit = Variable(img_vit.cuda())
-                    # img = Variable(img.cuda())
+                    img = Variable(img.cuda())
                     labels = Variable(labels.cuda())
                     #label_for_ce = Variable(label_for_ce.cuda())
                 else:
-                    point_coord, point_class, img_vit, labels = Variable(point_coord), Variable(point_class), Variable(img_vit), Variable(labels)
+                    img, point_coord, point_class, img_vit, labels = Variable(img), Variable(point_coord), Variable(point_class), Variable(img_vit), Variable(labels)
                 
                 # zero the parameter gradients
                 optimizer.zero_grad()
                 #label_for_ce = label_for_ce.long()
                 # forward
-                outputs = model(point_coord, point_class, img_vit, (h[0].item(), w[0].item()))
+                outputs = model(img, point_coord, point_class, img_vit, (h[0].item(), w[0].item()))
                 # print(outputs)
 
                 loss = criterion(outputs, labels)
