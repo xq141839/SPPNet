@@ -19,6 +19,7 @@ from loss import *
 from tqdm import tqdm
 import json
 import sppnet
+from modeling.tiny_vit_sam import TinyViT
 
 
 def get_train_transform():
@@ -159,8 +160,22 @@ if __name__ == '__main__':
     val_loader = torch.utils.data.DataLoader(dataset=val_dataset, batch_size=1 ,drop_last=True)
     
     dataloaders = {'train':train_loader,'valid':val_loader}
+   
+    vit_encoder =  TinyViT(img_size=1024, in_chans=3, num_classes=1000,
+            embed_dims=[64, 128, 160, 320],
+            depths=[2, 2, 6, 2],
+            num_heads=[2, 4, 5, 10],
+            window_sizes=[7, 7, 14, 7],
+            mlp_ratio=4.,
+            drop_rate=0.,
+            drop_path_rate=0.0,
+            use_checkpoint=True,
+            mbconv_expand_ratio=4.0,
+            local_conv_size=3,
+            layer_lr_decay=0.8
+        )
 
-    model_ft = sppnet.Model()
+    model_ft = sppnet.Model(image_encoder=vit_encoder)
 
     encoder_dict = torch.load(args.encoder)
     pre_dict = {k: v for k, v in encoder_dict.items() if list(k.split('.'))[0] == 'image_encoder'}
